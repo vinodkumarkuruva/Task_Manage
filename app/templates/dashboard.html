@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1>Dashboard</h1>
+<a href="{{ url_for('app.add_task') }}" class="btn">Add Task</a>
+<table class="task-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.title }}</td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.due_date }}</td>
+            <td>{{ task.status }}</td>
+            <td>
+                <a href="{{ url_for('app.edit_task', task_id=task.id) }}"class="btn">Edit</a>
+                <a href="{{ url_for('app.delete_task', task_id=task.id) }}" class = "btn">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
